@@ -109,10 +109,16 @@ function redirectAfterPost() {
   btn.textContent = '正在保存…';
   btn.style.opacity = '0.6';
 
-  // Give the form time to POST, then redirect
+  // Wait for iframe to finish loading (POST complete), then redirect
+  var iframe = document.getElementById('post-target');
+  var redirected = false;
+  iframe.onload = function() {
+    if (!redirected) { redirected = true; window.location.href = 'payment.html'; }
+  };
+  // Fallback: redirect after 5s even if iframe doesn't load
   setTimeout(function() {
-    window.location.href = 'payment.html';
-  }, 1200);
+    if (!redirected) { redirected = true; window.location.href = 'payment.html'; }
+  }, 5000);
 }
 </script>
 </body>
