@@ -76,7 +76,7 @@
 
     <!-- TODO: Replace YOUR_FORM_ID with your Formspree form ID
          Sign up free at https://formspree.io -->
-    <form action="payment.html" method="GET" id="signup-form">
+    <form id="signup-form" onsubmit="handleSubmit(event)">
       <div class="field">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="your@email.com" required>
@@ -93,9 +93,43 @@
         <label for="wechat">微信号</label>
         <input type="text" id="wechat" name="wechat" placeholder="方便拉你进内测群" required>
       </div>
-      <button type="submit" class="btn">下一步 · 付款 ¥19</button>
+      <button type="submit" class="btn" id="submit-btn">下一步 · 付款 ¥19</button>
     </form>
     <a href="index.html" class="back">← 返回首页</a>
   </div>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyaFtpFDfVA4sP4YF8pk3pqJQ4cPM7xMCpxgKcDwXDvroTYcRfBwQAIlDMTF79WNqPXOA/exec';
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    var btn = document.getElementById('submit-btn');
+    btn.textContent = '正在保存…';
+    btn.style.opacity = '0.6';
+
+    var data = {
+      email:  document.getElementById('email').value,
+      city:   document.getElementById('city').value,
+      dish:   document.getElementById('dish').value,
+      wechat: document.getElementById('wechat').value
+    };
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function() {
+      var params = new URLSearchParams(data).toString();
+      window.location.href = 'payment.html?' + params;
+    })
+    .catch(function() {
+      // Even on error, redirect — don't block the user
+      var params = new URLSearchParams(data).toString();
+      window.location.href = 'payment.html?' + params;
+    });
+  }
+</script>
 </body>
 </html>
