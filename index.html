@@ -5,32 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FoodList 🍲📚 — 小众菜，不缺料</title>
 
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-  <!-- Open Graph -->
   <meta property="og:title" content="FoodList — 小众菜，不缺料">
   <meta property="og:description" content="收录大湾区进口超市的真实货架。味醂在哪、香茅哪家新鲜、Garam Masala 到底有没有——查一下就知道。">
   <meta property="og:image" content="EnPapillote.jpeg">
   <meta property="og:type" content="website">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html, body {
-      height: 100%;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Noto Sans SC", "PingFang SC", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", sans-serif;
       background: #0a0a0a;
-      color: #ffffff;
+      color: #fff;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -38,193 +30,263 @@
     /* ── Hero ── */
     .hero {
       position: relative;
-      height: 100vh;
-      min-height: 600px;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
     }
-
     .hero-bg {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: url('EnPapillote.jpeg') center/cover no-repeat;
       filter: brightness(0.35);
       transform: scale(1.05);
       z-index: 0;
     }
-
     .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(0,0,0,0.5) 0%,
-        rgba(0,0,0,0.65) 50%,
-        rgba(0,0,0,0.8) 100%
-      );
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.8) 100%);
       z-index: 1;
     }
-
     .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 640px;
+      position: relative; z-index: 2;
+      text-align: center; max-width: 640px;
       padding: 2rem 1.5rem;
     }
-
-    /* ── Brand ── */
     .brand {
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 2rem;
+      font-size: 1rem; font-weight: 600; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7); margin-bottom: 2rem;
     }
-
-    /* ── Headline ── */
     .headline {
       font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 700;
-      line-height: 1.25;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
+      font-weight: 700; line-height: 1.2;
+      margin-bottom: 1.25rem; letter-spacing: -0.02em;
     }
-
-    /* ── Subhead ── */
     .subhead p {
       font-size: clamp(1rem, 2vw, 1.125rem);
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 0.5rem;
-      line-height: 1.7;
+      color: rgba(255,255,255,0.75); margin-bottom: 0.5rem; line-height: 1.7;
     }
-
-    .subhead .highlight {
-      color: rgba(255,255,255,0.9);
-      font-weight: 500;
-    }
-
+    .subhead .hl { color: rgba(255,255,255,0.9); font-weight: 500; }
     .pain-points {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.75rem 1.5rem;
-      margin-top: 1.25rem;
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 0.75rem 1.5rem; margin-top: 1.25rem;
     }
-
     .pain-points span {
-      font-size: 0.9375rem;
-      color: rgba(255,255,255,0.55);
-      white-space: nowrap;
+      font-size: 0.9375rem; color: rgba(255,255,255,0.5); white-space: nowrap;
     }
+    .pain-points span::before { content: "✕ "; color: rgba(255,255,255,0.25); }
 
-    .pain-points span::before {
-      content: "✕ ";
-      color: rgba(255,255,255,0.3);
+    .hero-cta {
+      margin-top: 2.5rem; display: flex; flex-direction: column;
+      align-items: center; gap: 0.75rem;
     }
-
-    /* ── CTA ── */
-    .cta-wrapper {
-      margin-top: 2.5rem;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      padding: 0.875rem 2.5rem;
-      font-size: 1.0625rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: #0a0a0a;
-      background: #f5c842;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
+    .btn-primary {
+      display: inline-block; padding: 0.875rem 2.5rem;
+      font-size: 1.0625rem; font-weight: 600; letter-spacing: 0.04em;
+      color: #0a0a0a; background: #f5c842;
+      border: none; border-radius: 8px; cursor: pointer; text-decoration: none;
       box-shadow: 0 2px 16px rgba(245,200,66,0.25);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #f0d96b; transform: translateY(-1px); }
+    .btn-ghost {
+      font-size: 0.9375rem; color: rgba(255,255,255,0.5); text-decoration: none;
+      border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: rgba(255,255,255,0.8); }
+
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 3; font-size: 1.5rem; color: rgba(255,255,255,0.2);
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
     }
 
-    .cta-btn:hover {
-      background: #f0d96b;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 24px rgba(245,200,66,0.35);
-    }
+    /* ── Sections ── */
+    section { padding: 5rem 1.5rem; }
+    .section-inner { max-width: 640px; margin: 0 auto; text-align: center; }
 
-    .cta-hint {
-      display: block;
-      margin-top: 0.75rem;
-      font-size: 0.8125rem;
-      color: rgba(255,255,255,0.35);
+    /* ── Lead Magnet ── */
+    #freebie { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); }
+    #freebie h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
+    #freebie .desc { font-size: 1rem; color: rgba(255,255,255,0.55); margin-bottom: 2rem; line-height: 1.7; }
+    .feature-list {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 0.5rem 1.25rem; margin-bottom: 2rem;
     }
+    .feature-list span {
+      font-size: 0.9375rem; color: rgba(255,255,255,0.6);
+    }
+    .feature-list span::before { content: "✓ "; color: #f5c842; }
+
+    .email-form { display: flex; gap: 0.75rem; max-width: 440px; margin: 0 auto; }
+    .email-form input {
+      flex: 1; padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px; color: #fff; font-size: 0.9375rem; font-family: inherit;
+      outline: none;
+    }
+    .email-form input:focus { border-color: rgba(245,200,66,0.5); }
+    .email-form button {
+      padding: 0.75rem 1.5rem; font-size: 0.9375rem; font-weight: 600;
+      color: #0a0a0a; background: #f5c842; border: none; border-radius: 10px;
+      cursor: pointer; white-space: nowrap; transition: background 0.2s;
+    }
+    .email-form button:hover { background: #f0d96b; }
+    .email-form button:disabled { opacity: 0.6; cursor: default; }
+
+    .form-msg { margin-top: 1rem; font-size: 0.875rem; min-height: 1.5rem; }
+    .form-msg.success { color: #4ade80; }
+    .form-msg.error { color: #f87171; }
+
+    /* ── Premium ── */
+    #premium { background: rgba(245,200,66,0.03); border-top: 1px solid rgba(255,255,255,0.05); }
+    #premium h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    #premium .price { font-size: 2.5rem; font-weight: 700; color: #f5c842; margin-bottom: 0.25rem; }
+    #premium .price-sub { font-size: 0.8125rem; color: rgba(255,255,255,0.35); margin-bottom: 2rem; }
+    .feature-cards {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .feat-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px; padding: 1.5rem 1rem;
+    }
+    .feat-card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .feat-card h3 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.375rem; }
+    .feat-card p { font-size: 0.8125rem; color: rgba(255,255,255,0.45); }
 
     /* ── Footer ── */
-    .footer {
-      position: absolute;
-      bottom: 2rem;
-      left: 0;
-      right: 0;
-      text-align: center;
-      z-index: 3;
+    footer {
+      text-align: center; padding: 2rem 1.5rem;
+      font-size: 0.75rem; color: rgba(255,255,255,0.15);
+      border-top: 1px solid rgba(255,255,255,0.04);
     }
 
-    .footer span {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.2);
-    }
-
-    /* ── Responsive ── */
     @media (max-width: 480px) {
-      .hero-content {
-        padding: 1.5rem 1.25rem;
-      }
-      .pain-points {
-        flex-direction: column;
-        gap: 0.35rem;
-      }
-      .cta-btn {
-        width: 100%;
-      }
+      .hero-content { padding: 1.5rem 1.25rem; }
+      .pain-points { flex-direction: column; gap: 0.35rem; }
+      .email-form { flex-direction: column; }
+      .email-form button { width: 100%; }
+      .feature-cards { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+  <!-- ═══ Hero ═══ -->
   <section class="hero">
     <div class="hero-bg" role="img" aria-label="纸包鱼 En Papillote"></div>
     <div class="hero-overlay"></div>
 
     <div class="hero-content">
-      <!-- Brand -->
       <div class="brand">🍲 FoodList 📚</div>
-
-      <!-- Headline -->
       <h1 class="headline">小众菜<br>不缺料</h1>
-
-      <!-- Subhead -->
       <div class="subhead">
-        <p>FoodList 收录<span class="highlight">大湾区</span>进口超市的真实货架。</p>
-        <p>做日料、韩餐、冬阴功——<span class="highlight">输入菜名</span>，几秒知道去哪买。</p>
+        <p>FoodList 收录<span class="hl">大湾区</span>进口超市的真实货架。</p>
+        <p>做日料、韩餐、冬阴功——<span class="hl">输入菜名</span>，几秒知道去哪买。</p>
         <div class="pain-points">
           <span>不用为味醂跑三家店</span>
           <span>不用拿老抽替代日本酱油</span>
           <span>不用翻遍进口区找香茅</span>
         </div>
       </div>
-
-      <!-- CTA -->
-      <div class="cta-wrapper">
-        <a href="signup.html" class="cta-btn">立刻体验</a>
-        <span class="cta-hint">内测价 ¥19/月 · 名额有限</span>
+      <div class="hero-cta">
+        <a href="#freebie" class="btn-primary">免费领取采购地图 ↓</a>
+        <a href="signup.html" class="btn-ghost">或直接订阅 · ¥19/月</a>
       </div>
     </div>
 
-    <div class="footer">
-      <span>© 2026 FoodList</span>
+    <div class="scroll-hint">↓</div>
+  </section>
+
+  <!-- ═══ Free Lead Magnet ═══ -->
+  <section id="freebie">
+    <div class="section-inner">
+      <h2>免费领取《大湾区小众外国菜采购地图》</h2>
+      <p class="desc">
+        味醂去哪买？香茅买不到怎么办？<br>
+        10 种最常缺的小众食材 + 替代方案 + 湾区实测货源。
+      </p>
+      <div class="feature-list">
+        <span>味醂 · 清酒+糖替代</span>
+        <span>香茅 · 柠檬皮替代</span>
+        <span>Garam Masala · 自制配方</span>
+        <span>Pancetta · 哪家有</span>
+        <span>明太子 · 湾区实测</span>
+      </div>
+
+      <form class="email-form" id="freebie-form" onsubmit="submitFreebie(event)">
+        <input type="email" id="freebie-email" placeholder="输入邮箱，立刻发送" required>
+        <button type="submit" id="freebie-btn">免费下载</button>
+      </form>
+      <div class="form-msg" id="freebie-msg"></div>
     </div>
   </section>
+
+  <!-- ═══ Premium ═══ -->
+  <section id="premium">
+    <div class="section-inner">
+      <h2>FoodList Pro</h2>
+      <div class="price">¥19<span style="font-size:1rem;font-weight:400">/月</span></div>
+      <div class="price-sub">随时取消 · 不满意全额退款</div>
+
+      <div class="feature-cards">
+        <div class="feat-card">
+          <div class="icon">📊</div>
+          <h3>实时货架数据库</h3>
+          <p>大湾区进口超市最新存货，社区共建持续更新</p>
+        </div>
+        <div class="feat-card">
+          <div class="icon">🗺️</div>
+          <h3>采购路线规划</h3>
+          <p>输入菜名，自动算最短路线，一趟买齐所有食材</p>
+        </div>
+        <div class="feat-card">
+          <div class="icon">💬</div>
+          <h3>内部社群</h3>
+          <p>和大湾区同好交换情报，发现隐藏货源</p>
+        </div>
+      </div>
+
+      <a href="signup.html" class="btn-primary">立即订阅 · ¥19/月</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 FoodList · 大湾区小众菜采购指南</span>
+  </footer>
+
+<script>
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyaFtpFDfVA4sP4YF8pk3pqJQ4cPM7xMCpxgKcDwXDvroTYcRfBwQAIlDMTF79WNqPXOA/exec';
+
+function submitFreebie(e) {
+  e.preventDefault();
+  var btn = document.getElementById('freebie-btn');
+  var msg = document.getElementById('freebie-msg');
+  var email = document.getElementById('freebie-email').value;
+
+  btn.textContent = '发送中…';
+  btn.disabled = true;
+
+  var data = new FormData();
+  data.append('email', email);
+  data.append('type', 'freebie');
+
+  fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data })
+    .finally(function() {
+      btn.textContent = '已发送 ✓';
+      msg.className = 'form-msg success';
+      msg.textContent = '✅ 采购地图已发送到 ' + email + '。检查收件箱（可能在垃圾邮件里）。';
+      document.getElementById('freebie-email').value = '';
+    });
+  return false;
+}
+</script>
 
 </body>
 </html>
