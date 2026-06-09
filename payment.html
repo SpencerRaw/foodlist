@@ -61,6 +61,29 @@
     .note { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
     .back { display: block; margin-top: 1.25rem; font-size: 0.8125rem; color: rgba(255,255,255,0.3); text-decoration: none; }
     .back:hover { color: rgba(255,255,255,0.5); }
+
+    .paid-btn {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #0a0a0a;
+      background: #f5c842;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 2px 16px rgba(245,200,66,0.2);
+      transition: background 0.2s;
+    }
+    .paid-btn:hover { background: #f0d96b; }
+    .paid-btn.done {
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.5);
+      box-shadow: none;
+      cursor: default;
+    }
+    .confirm-msg { display: none; font-size: 0.875rem; color: #f5c842; margin-bottom: 1.5rem; }
   </style>
 </head>
 <body>
@@ -81,10 +104,14 @@
     <div class="steps">
       <p><span>1.</span> 截图或长按识别上方二维码</p>
       <p><span>2.</span> 付款 <strong>¥19</strong></p>
-      <p><span>3.</span> 24 小时内通过微信拉你进内测群</p>
+      <p><span>3.</span> 点下方「我已付款」</p>
+      <p><span>4.</span> 24 小时内微信拉你进内测群</p>
     </div>
 
-    <p class="note">有任何问题，微信联系</p>
+    <button class="paid-btn" id="paid-btn" onclick="markPaid()">我已付款 ✓</button>
+    <p class="confirm-msg" id="confirm-msg">✅ 收到！我们会在微信上核实并拉你进群</p>
+
+    <p class="note">不满意随时微信联系退款，全额退</p>
 
     <a href="index.html" class="back">← 返回首页</a>
   </div>
@@ -99,5 +126,24 @@
     qrBox.appendChild(img);
   };
   img.src = 'qr-code.png';
+
+  function markPaid() {
+    const btn = document.getElementById('paid-btn');
+    const msg = document.getElementById('confirm-msg');
+    btn.classList.add('done');
+    btn.textContent = '已通知';
+    btn.onclick = null;
+    msg.style.display = 'block';
+
+    // Capture form data from URL (passed from signup.html)
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email') || '';
+    const city  = params.get('city')  || '';
+    const dish  = params.get('dish')  || '';
+    const wechat = params.get('wechat') || '';
+
+    // Log to console (you can check browser console for now)
+    console.log('PAID:', {email, city, dish, wechat, time: new Date().toISOString()});
+  }
 </script>
 </html>
