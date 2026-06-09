@@ -71,55 +71,29 @@
     <div class="brand">🍲 FoodList 📚</div>
     <h1>加入内测</h1>
     <p class="sub">第一批用户，搞定你的采购路线</p>
-
     <div class="price-tag"><span>¥19 / 月</span></div>
 
-    <form id="signup-form"
-          action="https://script.google.com/macros/s/AKfycbyaFtpFDfVA4sP4YF8pk3pqJQ4cPM7xMCpxgKcDwXDvroTYcRfBwQAIlDMTF79WNqPXOA/exec"
-          method="POST"
-          target="post-target"
-          onsubmit="redirectAfterPost()">
+    <form action="https://script.google.com/macros/s/AKfycbyaFtpFDfVA4sP4YF8pk3pqJQ4cPM7xMCpxgKcDwXDvroTYcRfBwQAIlDMTF79WNqPXOA/exec" method="POST">
       <div class="field">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        <input type="email" name="email" placeholder="your@email.com" required>
       </div>
       <div class="field">
         <label for="city">你在哪个城市？</label>
-        <input type="text" id="city" name="city" placeholder="比如 北京" required>
+        <input type="text" name="city" placeholder="比如 北京" required>
       </div>
       <div class="field">
         <label for="dish">最想做什么菜但买不齐？</label>
-        <textarea id="dish" name="dish" placeholder="比如 酸菜鱼、寿司、冬阴功…" required></textarea>
+        <textarea name="dish" placeholder="比如 酸菜鱼、寿司、冬阴功…" required></textarea>
       </div>
       <div class="field">
         <label for="wechat">微信号</label>
-        <input type="text" id="wechat" name="wechat" placeholder="方便拉你进内测群" required>
+        <input type="text" name="wechat" placeholder="方便拉你进内测群" required>
       </div>
-      <button type="submit" class="btn" id="submit-btn">下一步 · 付款 ¥19</button>
+      <button type="submit" class="btn">下一步 · 付款 ¥19</button>
     </form>
-
-    <iframe name="post-target" style="display:none" id="post-target"></iframe>
 
     <a href="index.html" class="back">← 返回首页</a>
   </div>
-
-<script>
-function redirectAfterPost() {
-  var btn = document.getElementById('submit-btn');
-  btn.textContent = '正在保存…';
-  btn.style.opacity = '0.6';
-
-  // Wait for iframe to finish loading (POST complete), then redirect
-  var iframe = document.getElementById('post-target');
-  var redirected = false;
-  iframe.onload = function() {
-    if (!redirected) { redirected = true; window.location.href = 'payment.html'; }
-  };
-  // Fallback: redirect after 5s even if iframe doesn't load
-  setTimeout(function() {
-    if (!redirected) { redirected = true; window.location.href = 'payment.html'; }
-  }, 5000);
-}
-</script>
 </body>
 </html>
