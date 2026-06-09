@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodList 🍲📚 — 想做啥菜一次买齐</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FoodList — 想做啥菜一次买齐">
+  <meta property="og:description" content="整合全城超市的真实货架数据。输入菜名，几秒算出最短采购路线。">
+  <meta property="og:image" content="EnPapillote.jpeg">
+  <meta property="og:type" content="website">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Noto Sans SC", "PingFang SC", sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('EnPapillote.jpeg') center/cover no-repeat;
+      filter: brightness(0.35);
+      transform: scale(1.05);
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0.5) 0%,
+        rgba(0,0,0,0.65) 50%,
+        rgba(0,0,0,0.8) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 640px;
+      padding: 2rem 1.5rem;
+    }
+
+    /* ── Brand ── */
+    .brand {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 2rem;
+    }
+
+    /* ── Headline ── */
+    .headline {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Subhead ── */
+    .subhead p {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+    }
+
+    .subhead .highlight {
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+    }
+
+    .pain-points {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem 1.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .pain-points span {
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.55);
+      white-space: nowrap;
+    }
+
+    .pain-points span::before {
+      content: "✕ ";
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── CTA ── */
+    .cta-wrapper {
+      margin-top: 2.5rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 0.875rem 2.5rem;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #0a0a0a;
+      background: #f5c842;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 2px 16px rgba(245,200,66,0.25);
+    }
+
+    .cta-btn:hover {
+      background: #f0d96b;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 24px rgba(245,200,66,0.35);
+    }
+
+    .cta-hint {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      position: absolute;
+      bottom: 2rem;
+      left: 0;
+      right: 0;
+      text-align: center;
+      z-index: 3;
+    }
+
+    .footer span {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .hero-content {
+        padding: 1.5rem 1.25rem;
+      }
+      .pain-points {
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+      .cta-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-bg" role="img" aria-label="纸包鱼 En Papillote"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <!-- Brand -->
+      <div class="brand">🍲 FoodList 📚</div>
+
+      <!-- Headline -->
+      <h1 class="headline">想做啥菜<br>一次买齐</h1>
+
+      <!-- Subhead -->
+      <div class="subhead">
+        <p>FoodList 整合全城超市的<span class="highlight">真实货架数据</span>。</p>
+        <p>输入菜名，几秒算出<span class="highlight">最短采购路线</span>。</p>
+        <div class="pain-points">
+          <span>不用查哪家有</span>
+          <span>不用比品控</span>
+          <span>不用跑冤枉路</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-wrapper">
+        <a href="#" class="cta-btn">立刻体验</a>
+        <span class="cta-hint">内测邀请中 · 名额有限</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>© 2026 FoodList</span>
+    </div>
+  </section>
+
+</body>
+</html>
