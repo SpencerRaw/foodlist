@@ -221,10 +221,14 @@
       </div>
 
       <form class="email-form" id="freebie-form" onsubmit="submitFreebie(event)">
-        <input type="email" id="freebie-email" placeholder="输入邮箱，立刻发送" required>
+        <input type="email" id="freebie-email" placeholder="输入邮箱，立刻下载" required>
         <button type="submit" id="freebie-btn">免费下载</button>
       </form>
       <div class="form-msg" id="freebie-msg"></div>
+      <div id="freebie-dl" style="display:none; margin-top:1.25rem;">
+        <a href="大湾区小众外国菜采购地图-v1.pdf" class="btn-primary" download>📥 点击下载 PDF</a>
+        <p style="font-size:0.8125rem;color:rgba(255,255,255,0.35);margin-top:0.75rem;">10 种食材 · 替代方案 · 湾区实测渠道</p>
+      </div>
     </div>
   </section>
 
@@ -277,13 +281,14 @@ function submitFreebie(e) {
   data.append('email', email);
   data.append('type', 'freebie');
 
-  fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data })
-    .finally(function() {
-      btn.textContent = '已发送 ✓';
-      msg.className = 'form-msg success';
-      msg.textContent = '✅ 采购地图已发送到 ' + email + '。检查收件箱（可能在垃圾邮件里）。';
-      document.getElementById('freebie-email').value = '';
-    });
+  // Show download immediately — don't wait for email
+  document.getElementById('freebie-form').style.display = 'none';
+  document.getElementById('freebie-dl').style.display = 'block';
+  msg.className = 'form-msg success';
+  msg.textContent = '✅ 邮箱已记录。点击上方按钮下载 PDF。';
+
+  // Silently save to Sheet in background
+  fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data });
   return false;
 }
 </script>
