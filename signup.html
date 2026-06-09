@@ -114,21 +114,34 @@
       wechat: document.getElementById('wechat').value
     };
 
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    .then(function() {
-      var params = new URLSearchParams(data).toString();
-      window.location.href = 'payment.html?' + params;
-    })
-    .catch(function() {
-      // Even on error, redirect — don't block the user
-      var params = new URLSearchParams(data).toString();
-      window.location.href = 'payment.html?' + params;
+    // Use a hidden form to POST — no CORS, always works
+    var iframe = document.createElement('iframe');
+    iframe.name = 'hidden-frame';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = SCRIPT_URL;
+    form.target = 'hidden-frame';
+    form.style.display = 'none';
+
+    Object.keys(data).forEach(function(key) {
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = data[key];
+      form.appendChild(input);
     });
+
+    document.body.appendChild(form);
+    form.submit();
+
+    // Redirect after short delay (Apps Script processes in background)
+    setTimeout(function() {
+      var params = new URLSearchParams(data).toString();
+      window.location.href = 'payment.html?' + params;
+    }, 800);
   }
 </script>
 </body>
