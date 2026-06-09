@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>确认付款 · FoodList</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+    }
+    .brand { font-size: 0.875rem; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+    h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .sub { font-size: 0.875rem; color: rgba(255,255,255,0.45); margin-bottom: 2rem; }
+
+    .price { font-size: 3rem; font-weight: 700; color: #f5c842; margin-bottom: 0.25rem; }
+    .price-sub { font-size: 0.8125rem; color: rgba(255,255,255,0.35); margin-bottom: 2rem; }
+
+    .qr-placeholder {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 1.5rem;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 2px dashed rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.8125rem;
+    }
+
+    .qr-placeholder img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+
+    .steps { text-align: left; font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.8; margin-bottom: 2rem; }
+    .steps span { color: #f5c842; font-weight: 600; }
+
+    .note { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+    .back { display: block; margin-top: 1.25rem; font-size: 0.8125rem; color: rgba(255,255,255,0.3); text-decoration: none; }
+    .back:hover { color: rgba(255,255,255,0.5); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">🍲 FoodList 📚</div>
+    <h1>确认付款</h1>
+    <p class="sub">付完拉你进内测群</p>
+
+    <div class="price">¥19</div>
+    <div class="price-sub">首月 · 之后每月 ¥19</div>
+
+    <!-- TODO: Replace with your actual WeChat/Alipay QR code image -->
+    <!-- Save your QR code as qr-code.png in the same folder -->
+    <div class="qr-placeholder" id="qr-box">
+      <span>微信收款码</span>
+    </div>
+
+    <div class="steps">
+      <p><span>1.</span> 截图或长按识别上方二维码</p>
+      <p><span>2.</span> 付款 <strong>¥19</strong></p>
+      <p><span>3.</span> 24 小时内通过微信拉你进内测群</p>
+    </div>
+
+    <p class="note">有任何问题，微信联系</p>
+
+    <a href="index.html" class="back">← 返回首页</a>
+  </div>
+</body>
+
+<script>
+  // Auto-show QR code image if qr-code.png exists
+  const qrBox = document.getElementById('qr-box');
+  const img = new Image();
+  img.onload = function() {
+    qrBox.innerHTML = '';
+    qrBox.appendChild(img);
+  };
+  img.src = 'qr-code.png';
+</script>
+</html>

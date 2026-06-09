@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>加入内测 · FoodList</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      width: 100%;
+    }
+    .brand { font-size: 0.875rem; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; margin-bottom: 1.5rem; text-align: center; }
+    h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; text-align: center; }
+    .sub { font-size: 0.875rem; color: rgba(255,255,255,0.45); margin-bottom: 2rem; text-align: center; }
+    .field { margin-bottom: 1.25rem; }
+    label { display: block; font-size: 0.8125rem; color: rgba(255,255,255,0.6); margin-bottom: 0.375rem; }
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.9375rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus { border-color: rgba(245,200,66,0.5); }
+    textarea { resize: vertical; min-height: 60px; }
+    .btn {
+      width: 100%;
+      padding: 0.875rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0a0a0a;
+      background: #f5c842;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      box-shadow: 0 2px 16px rgba(245,200,66,0.2);
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #f0d96b; }
+    .back { display: block; text-align: center; margin-top: 1.25rem; font-size: 0.8125rem; color: rgba(255,255,255,0.3); text-decoration: none; }
+    .back:hover { color: rgba(255,255,255,0.5); }
+    .price-tag { text-align: center; margin-bottom: 1.5rem; }
+    .price-tag span { display: inline-block; background: rgba(245,200,66,0.12); color: #f5c842; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8125rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">🍲 FoodList 📚</div>
+    <h1>加入内测</h1>
+    <p class="sub">第一批用户，搞定你的采购路线</p>
+
+    <div class="price-tag"><span>¥19 / 月</span></div>
+
+    <!-- TODO: Replace YOUR_FORM_ID with your Formspree form ID
+         Sign up free at https://formspree.io -->
+    <form action="payment.html" method="GET" id="signup-form">
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="field">
+        <label for="city">你在哪个城市？</label>
+        <input type="text" id="city" name="city" placeholder="比如 北京" required>
+      </div>
+      <div class="field">
+        <label for="dish">最想做什么菜但买不齐？</label>
+        <textarea id="dish" name="dish" placeholder="比如 酸菜鱼、寿司、冬阴功…" required></textarea>
+      </div>
+      <div class="field">
+        <label for="wechat">微信号</label>
+        <input type="text" id="wechat" name="wechat" placeholder="方便拉你进内测群" required>
+      </div>
+      <button type="submit" class="btn">下一步 · 付款 ¥19</button>
+    </form>
+    <a href="index.html" class="back">← 返回首页</a>
+  </div>
+</body>
+</html>
