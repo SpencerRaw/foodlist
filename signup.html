@@ -49,11 +49,9 @@
     <p class="sub">第一批用户，搞定你的采购路线</p>
     <div class="price-tag"><span>¥19 / 月</span></div>
 
-    <!-- Hidden iframe for form POST target -->
-    <iframe name="post-target" style="display:none"></iframe>
-
-    <form action="https://script.google.com/macros/s/AKfycbyaFtpFDfVA4sP4YF8pk3pqJQ4cPM7xMCpxgKcDwXDvroTYcRfBwQAIlDMTF79WNqPXOA/exec"
-          method="POST" target="post-target" onsubmit="handleSubmit()">
+    <form id="signup-form"
+          action="https://script.google.com/macros/s/AKfycbyaFtpFDfVA4sP4YF8pk3pqJQ4cPM7xMCpxgKcDwXDvroTYcRfBwQAIlDMTF79WNqPXOA/exec"
+          method="POST" onsubmit="return handleSubmit(event)">
       <div class="field">
         <label>Email</label>
         <input type="email" name="email" placeholder="your@email.com" required>
@@ -77,14 +75,19 @@
   </div>
 
 <script>
-function handleSubmit() {
+function handleSubmit(e) {
+  e.preventDefault();
   var btn = document.getElementById('submit-btn');
   btn.textContent = '保存中…';
   btn.disabled = true;
-  // Form posts to hidden iframe. Redirect main page after 2s.
-  setTimeout(function() {
-    window.location.href = 'payment.html';
-  }, 2000);
+
+  // POST form data (URL-encoded, not JSON — Apps Script expects this)
+  var data = new FormData(e.target);
+  fetch(e.target.action, { method: 'POST', mode: 'no-cors', body: data })
+    .finally(function() {
+      window.location.href = 'payment.html';
+    });
+  return false;
 }
 </script>
 </body>
